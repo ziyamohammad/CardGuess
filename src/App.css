@@ -65,3 +65,30 @@ background-color: rgb(255, 255, 255);
 }
 
 
+@media screen and (max-width:769px){
+ .c,.cflip {
+    height: 11.5vh;
+    width: 9.5vw;
+  }
+ 
+}
+
+
+@media screen and (max-width:500px) {
+  .c,.cflip{
+    height: 10.5vh;
+    width: 14.5vw;
+  }
+  
+}
+@media screen and (max-width:321px){
+  .c,.cflip{
+    height: 9.5vh;
+    width: 16.5vw;
+}
+}
+
+
+
+
+
