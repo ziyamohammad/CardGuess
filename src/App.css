@@ -7,6 +7,72 @@
     font-family:Nevan;
     src:url(Nevan.ttf);
 }
+.start{
+  position:absolute;
+  width:100vw;
+  height: 100vh;
+  display: flex;
+ 
+  top:0;
+  left:0;
+  z-index: 1000;
+}
+.nostart {
+  animation: fadeOut 0.5s forwards;
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+.half,.half2{
+  width:50vw;
+  height:100vh;
+  border-right:2px solid black;
+   background-color:#b3dbf5;
+}
+.halfani {
+  animation: slideLeft 1s forwards;
+}
+
+.halfani2 {
+  animation: slideRight 1s forwards;
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+/* Button hides when animation starts */
+
+.startgame{
+position: absolute;
+    top: 50vh;
+    left: 46vw;
+    width: 119px;
+    height: 40px;
+    font-family:Nevan;
+    background-color: blue;
+    color:aliceblue;
+}
 .App{
     width:100vw;
     height:100vh;
@@ -16,8 +82,13 @@
     display:flex;
     flex-direction: column;
     align-items: center;
+    transition: opacity 1s ease;
     
 }
+.App.visible {
+  opacity: 1;
+}
+
 h1{
     color:#b3dbf5;
     font-size: 40px;

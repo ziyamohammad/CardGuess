@@ -1,9 +1,12 @@
-import logo from './logo.svg';
+
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const[flipped,setFlipped]=useState([])
+  const[start,setStart]=useState(false)
+   const [showStart, setShowStart] = useState(true);
+  
   const handleflip=(index)=>{
  
   if (flipped.includes(index)) {
@@ -17,9 +20,32 @@ function App() {
   }
 };
 
+const handlestart = () =>{
+  setStart(!start)
+}
+
+ useEffect(() => {
+    if (start) {
+      setTimeout(() => {
+        setShowStart(false);
+      },1000); // wait for animation to finish
+    }
+  }, [start]);
+
   
   return (
-    <div className="App">
+    <>
+     {showStart && (
+        <div className="start">
+         < div className={`half ${start ? "halfani" : ""}`}></div>
+
+          <button className={start ? "nostart" : "startgame"} onClick={handlestart}>
+            Start
+          </button>
+
+          <div className={`half2 ${start ? "halfani2" : ""}`}></div></div>
+        )}
+    <div className={`App ${!showStart ? "visible" : ""}`}>
      <h1>Flip 'n' Guess</h1>
      <div className="head"><h2>Choose The Cards</h2>
      <div className="mainbox">
@@ -55,6 +81,8 @@ function App() {
      </div>
      </div>
     </div>
+    </>
+    
   );
 }
 
