@@ -1,25 +1,28 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 @font-face {
-    font-family:Nevan;
-    src:url(Nevan.ttf);
+  font-family: Nevan;
+  src: url(Nevan.ttf);
 }
-.start{
-  position:absolute;
-  width:100vw;
+
+.start {
+  position: absolute;
+  width: 100vw;
   height: 100vh;
   display: flex;
- 
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   z-index: 1000;
 }
+
 .nostart {
   animation: fadeOut 0.5s forwards;
 }
+
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -30,12 +33,15 @@
     pointer-events: none;
   }
 }
-.half,.half2{
-  width:50vw;
-  height:100vh;
-  border-right:2px solid black;
-   background-color:#b3dbf5;
+
+.half,
+.half2 {
+  width: 50vw;
+  height: 100vh;
+  border-right: 2px solid black;
+  background-color: #b3dbf5;
 }
+
 .halfani {
   animation: slideLeft 1s forwards;
 }
@@ -61,105 +67,127 @@
     transform: translateX(100%);
   }
 }
-/* Button hides when animation starts */
 
-.startgame{
-position: absolute;
-    top: 50vh;
-    left: 46vw;
-    width: 119px;
-    height: 40px;
-    font-family:Nevan;
-    background-color: blue;
-    color:aliceblue;
+.startgame {
+  position: absolute;
+  top: 50vh;
+  left: 46vw;
+  width: 119px;
+  height: 40px;
+  font-family: Nevan;
+  background-color: blue;
+  color: aliceblue;
 }
-.App{
-    width:100vw;
-    height:100vh;
-    font-family: Nevan;
-    background-image:url(game-console-6603120.jpg) ;
-    background-size: cover;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    transition: opacity 1s ease;
-    
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  font-family: Nevan;
+  background-image: url(game-console-6603120.jpg);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 1s ease;
 }
+
 .App.visible {
   opacity: 1;
 }
 
-h1{
-    color:#b3dbf5;
-    font-size: 40px;
-    margin-top: 20px;
-    margin-bottom: 40px;
+h1 {
+  color: #b3dbf5;
+  font-size: 40px;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
-h2{
-    color:#b3dbf5; 
-    margin-bottom: 20px;
-}
-.head{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-.mainbox{
-    display:flex;
-    flex-direction: column;
-     gap:10px;
-}
-.row{
-    display:flex;
-    gap:10px;
 
+h2 {
+  color: #b3dbf5;
+  margin-bottom: 20px;
 }
-.c{
-   height:11.5vh;
-  width:6.5vw;
-background-color: rgb(255, 255, 255);
-  border-radius:8px;
-    transition: transform 0.6s ease-in-out;
-  transform-style: preserve-3d;
-   background-image: url(game-console-6603120.jpg);
+
+.head {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
-.cflip{
-    height:11.5vh;
-  width:6.5vw;
- 
-background-color: rgb(255, 255, 255);
-  border-radius:8px;
+
+.mainbox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+/* NEW: Card wrapper */
+.card {
+  perspective: 1000px;
+  width: 6.5vw;
+  height: 11.5vh;
+}
+
+/* Front and back shared base */
+.c,
+.cflip {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
   transition: transform 0.6s ease-in-out;
-   transform: rotateY(180deg);
   transform-style: preserve-3d;
-  
+  position: relative;
+  cursor: pointer;
+  background-color: #fff;
+  background-position: center;
+  background-size: cover;
 }
 
+/* Front face */
+.c::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  backface-visibility: hidden;
+}
 
-@media screen and (max-width:769px){
- .c,.cflip {
-    height: 11.5vh;
+/* Flip effect */
+.cflip {
+  transform: rotateY(180deg);
+}
+.gameinfo{
+  /* width:60%; */
+  font-family:Nevan ;
+  color:white;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 20px;
+}
+
+/* RESPONSIVE TWEAKS */
+@media screen and (max-width: 769px) {
+  .card {
     width: 9.5vw;
   }
- 
 }
 
-
-@media screen and (max-width:500px) {
-  .c,.cflip{
-    height: 10.5vh;
+@media screen and (max-width: 500px) {
+  .card {
     width: 14.5vw;
   }
-  
 }
-@media screen and (max-width:321px){
-  .c,.cflip{
-    height: 9.5vh;
+
+@media screen and (max-width: 321px) {
+  .card {
     width: 16.5vw;
+  }
 }
-}
-
-
-
-
-
