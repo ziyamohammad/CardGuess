@@ -90,6 +90,10 @@
   align-items: center;
   transition: opacity 1s ease;
 }
+.Main {
+  width: 100vw;
+  height: 100vh;
+}
 
 .App.visible {
   opacity: 1;
