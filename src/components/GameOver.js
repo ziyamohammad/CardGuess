@@ -2,17 +2,15 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const GameOver = ({ moves }) => {
-  const [highestScore, setHighestScore] = useState(null);
+  const [highestScore, setHighestScore] = useState([]);
 
   useEffect(() => {
     const fetchMoves = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/user/getmoves');
-        const movesList = response.data.moves;
-        if (Array.isArray(movesList) && movesList.length > 0) {
-          const minMoves = Math.min(...movesList);
-          setHighestScore(minMoves);
-        }
+        const response = await axios.get('https://cardguess-backend.onrender.com/api/v1/user/getmoves');
+        const sortedLeaders = response.data.data.sort((a, b) => a.moves - b.moves);
+        setHighestScore(sortedLeaders)
+        console.log(highestScore)
       } catch (error) {
         console.error('Error fetching moves:', error);
       }
@@ -24,10 +22,26 @@ const GameOver = ({ moves }) => {
   return (
     <div className="gameover">
       <h1 className="gm">Game Over</h1>
-      <h3>Your Score = {moves} moves</h3>
-      <h3>
-        Highest Score = {highestScore !== null ? `${highestScore} moves` : 'Loading...'}
-      </h3>
+      <div className="table">
+         <div className="rowleaders">
+           <span className='scoreh'>Position</span>
+              <span className='nameh'>Username</span>
+               <span className='movesh'>Moves</span>
+               
+          </div>
+        {highestScore.map((leader,index)=>{
+          return(
+            <div className="rowleaders" key={leader._id || index} >
+               <span className='score'>{index+1}</span>
+              <span className='name'>{leader.username}</span>
+               <span className='moves'>{leader.moves}</span>
+               
+              
+            </div>
+          )
+        })}
+      </div>
+     
     </div>
   );
 };

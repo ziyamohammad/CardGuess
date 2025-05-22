@@ -11,14 +11,14 @@ const Min = ({handlepass}) => {
   const [score,SetScore]=useState(0);
   const[moves,setMoves]=useState(0)
   const navigate = useNavigate();
+  const[username,setUsername] = useState("");
 
-  // const img = [{
-  //   id:"0",
-  //   url:
-  // }]
   
 
   const handleflip = (index) => {
+    if(username===""){
+      alert("please enter gamer name");
+    }
   setMoves(moves + 1);
   if (flipped.includes(index) || matched.includes(index) || flipped.length === 2) return;
 
@@ -42,13 +42,14 @@ const Min = ({handlepass}) => {
           setMatched(newMatched);
           SetScore((prev) => prev + 1000);
 
-          // ✅ Redirect after all cards matched
+         
           if (newMatched.length === images.length) {
             try{
-               const response = await axios.post(`http://localhost:3000/api/v1/user/moves`,{
-                moves:parseInt(moves)
+               const response = await axios.post(`https://cardguess-backend.onrender.com/api/v1/user/moves`,{
+                moves:parseInt(moves),
+                username:username
                })
-              //  console.log(response.data);
+               console.log(response.data);
                handlepass(moves)
             }catch(error){
                console.log(error);
@@ -139,7 +140,10 @@ const Min = ({handlepass}) => {
       })}
     </div>
   ))}
+  <form>
+   <input type="text" className="fg" value={username} placeholder="Enter Gamer Name" onChange={(e)=>{setUsername(e.target.value)}}/></form>
     <div className="gameinfo">
+         
           <span className="score">Score = {score}</span>
            <span className="moves">Moves = {moves}</span>
         </div>
