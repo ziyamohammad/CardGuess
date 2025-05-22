@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 
-const Min = () => {
+const Min = ({handlepass}) => {
   const [flipped, setFlipped] = useState([]);
   const [start, setStart] = useState(false);
   const [showStart, setShowStart] = useState(true);
@@ -34,7 +34,7 @@ const Min = () => {
     const secondImg = new Image();
     let loaded = 0;
 
-    const checkMatch = () => {
+    const checkMatch = async() => {
       loaded++;
       if (loaded === 2) {
         if (firstImage === secondImage) {
@@ -44,9 +44,18 @@ const Min = () => {
 
           // ✅ Redirect after all cards matched
           if (newMatched.length === images.length) {
+            try{
+               const response = await axios.post(`http://localhost:3000/api/v1/user/moves`,{
+                moves:parseInt(moves)
+               })
+              //  console.log(response.data);
+               handlepass(moves)
+            }catch(error){
+               console.log(error);
+            }
             setTimeout(() => {
-             navigate("/gameover") // Replace with actual URL
-            }, 1000); // allow last card to remain visible briefly
+             navigate("/gameover") 
+            }, 1000); 
           }
         }
 

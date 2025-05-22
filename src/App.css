@@ -195,3 +195,21 @@ h2 {
     width: 16.5vw;
   }
 }
+
+/* gameover page */
+
+.gameover{
+  width:100vw;
+  height:100vh;
+  background-image:url(game-console-6603120.jpg) ;
+  background-size: cover;
+  padding:40px;
+}
+.gm{
+  text-align: center;
+  font-size:50px;
+  text-decoration: underline;
+  font-family:Nevan;
+  color:#b3dbf5;
+  margin-top:0px;
+}
