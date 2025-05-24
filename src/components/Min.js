@@ -56,7 +56,7 @@ const Min = ({handlepass}) => {
             }
             setTimeout(() => {
              navigate("/gameover") 
-            }, 1000); 
+            }, 100); 
           }
         }
 
