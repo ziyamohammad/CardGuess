@@ -34,37 +34,40 @@ const Min = ({handlepass}) => {
     const secondImg = new Image();
     let loaded = 0;
 
-    const checkMatch = async() => {
-      loaded++;
-      if (loaded === 2) {
-        if (firstImage === secondImage) {
-          const newMatched = [...matched, firstIndex, secondIndex];
-          setMatched(newMatched);
-          SetScore((prev) => prev + 1000);
+    const checkMatch = async () => {
+  loaded++;
 
-         
-          if (newMatched.length === images.length) {
-            try{
-               const response = await axios.post(`https://cardguess-backend.onrender.com/api/v1/user/moves`,{
-                moves:parseInt(moves),
-                username:username
-               })
-               console.log(response.data);
-               handlepass(moves)
-            }catch(error){
-               console.log(error);
-            }
-            setTimeout(() => {
-             navigate("/gameover") 
-            }, 100); 
-          }
-        }
+  if (loaded === 2) {
+    if (firstImage === secondImage) {
+      const newMatched = [...matched, firstIndex, secondIndex];
+      setMatched(newMatched);
+      SetScore((prev) => prev + 1000);
 
+      if (newMatched.length === images.length) {
+        // ✅ Show the final matched cards for 1s
         setTimeout(() => {
-          setFlipped([]);
+          navigate("/gameover"); // Redirect after showing last flip
+          handlepass(moves);
+
+          // 🔁 Fire-and-forget API call
+          axios.post('https://cardguess-backend.onrender.com/api/v1/user/moves', {
+            moves: parseInt(moves),
+            username: username
+          }).then(res => console.log("Submitted moves:", res.data))
+            .catch(err => console.error("Failed to submit moves", err));
         }, 1000);
+
+        return; // Don't reset flipped manually
       }
-    };
+    }
+
+    // 🔄 Reset flipped cards if not a match or game not over
+    setTimeout(() => {
+      setFlipped([]);
+    }, 1000);
+  }
+};
+
 
     firstImg.onload = checkMatch;
     secondImg.onload = checkMatch;
