@@ -101,12 +101,4 @@ Have suggestions? Feel free to raise an issue or open a PR!
 
 ```
 
----
 
-Let me know if you'd like to:
-- Add **card icons** via Font Awesome or images
-- Deploy it to **GitHub Pages** or **Vercel**
-- Add **game difficulty levels** (Easy, Medium, Hard)
-
-This kind of readme will **instantly impress** recruiters and shows your **attention to detail + user experience awareness**.
-```
