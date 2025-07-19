@@ -7,7 +7,7 @@ A responsive, memory-based card flip game built with **HTML, CSS, and JavaScript
 
 ## 🎮 Live Demo
 
-🔗 [Play the Game Now](https://your-live-url.vercel.app)  
+🔗 [Play the Game Now](https://card-guess.vercel.app/)
 *(Replace with actual deployment link — Vercel, GitHub Pages, or Netlify)*
 
 
